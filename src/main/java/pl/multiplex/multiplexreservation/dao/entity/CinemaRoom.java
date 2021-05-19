@@ -1,11 +1,18 @@
 package pl.multiplex.multiplexreservation.dao.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+@Entity
 public class CinemaRoom
 {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private int number;
     private int number_of_rows;
     private int number_of_seats_in_row;
@@ -25,9 +32,9 @@ public class CinemaRoom
         int max = 100; int min = 1;
         prob = prob*100;
         boolean x = false;
-        for (int i=1;i<number_of_rows+1; i++)
+        for (int i=0;i<number_of_rows; i++)
         {
-            for (int j=1;j<number_of_seats_in_row+1; j++)
+            for (int j=0;j<number_of_seats_in_row; j++)
             {
                 Random random = new Random();
                 int draw = random.nextInt(max - min) + min;
