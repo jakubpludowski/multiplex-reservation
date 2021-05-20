@@ -1,31 +1,60 @@
 package pl.multiplex.multiplexreservation.dao.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 public class Movie
 {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    @SequenceGenerator(
+            name = "movie_sequence",
+            sequenceName = "movie_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "movie_sequence"
+    )
+    @Column(
+            name = "movieid"
+    )
+    private Long movieId;
     private String title;
     private double duration;
-    private int day;
-    private int hour;
+
+
+    @OneToMany
+    private Set<Screening> screenings;
+
+
+
+
+
+
+
+
+
+
+
+    public Movie(String title, double duration, Set<Screening> screenings) {
+        this.title = title;
+        this.duration = duration;
+        this.screenings = screenings;
+    }
 
     public Movie() {
     }
 
-    public Movie(String title, double duration, int day, int hour) {
-        this.title = title;
-        this.duration = duration;
-        this.day = day;
-        this.hour = hour;
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {
@@ -44,19 +73,20 @@ public class Movie
         this.duration = duration;
     }
 
-    public int getDay() {
-        return day;
+    public Set<Screening> getScreenings() {
+        return screenings;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setScreenings(Set<Screening> screenings) {
+        this.screenings = screenings;
     }
 
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieId=" + movieId +
+                ", title='" + title + '\'' +
+                ", duration=" + duration +
+                '}';
     }
 }
