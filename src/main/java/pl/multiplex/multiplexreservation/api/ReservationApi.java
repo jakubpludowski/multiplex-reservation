@@ -13,6 +13,5 @@ public class ReservationApi
 {
     private ReservationManager reservation;
 
-    @GetMapping("/all")
-    public Iterable<Reservation> showAll(){ return reservation.showAll();}
+
 }

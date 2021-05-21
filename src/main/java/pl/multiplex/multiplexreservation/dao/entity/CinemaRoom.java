@@ -35,12 +35,50 @@ public class CinemaRoom
 
 
 
+    public void addScreening(Screening x)
+    {
+        if(!this.screenings.contains(x))
+        {
+            this.screenings.add(x);
+            x.setCinemaRoomId(this);
+        }
+    }
+
+    public void removeScreening(Screening x)
+    {
+        if(this.screenings.contains(x))
+        {
+            this.screenings.remove(x);
+            x.setCinemaRoomId(null);
+        }
+    }
+
+    public void addSeat(Seat x)
+    {
+        if(!this.seats.contains(x))
+        {
+            this.seats.add(x);
+            x.setCinemaRoomId(this);
+        }
+    }
+
+    public void removeSeat(Seat x)
+    {
+        if(this.seats.contains(x))
+        {
+            this.seats.remove(x);
+            x.setCinemaRoomId(null);
+        }
+    }
 
 
 
 
-
-    public CinemaRoom(int nr_of_room, int max_row, int max_col, Set<Screening> screenings, Set<Seat> seats) {
+    public CinemaRoom(int nr_of_room,
+                      int max_row,
+                      int max_col,
+                      Set<Screening> screenings,
+                      Set<Seat> seats) {
         this.nr_of_room = nr_of_room;
         this.max_row = max_row;
         this.max_col = max_col;

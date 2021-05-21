@@ -23,7 +23,10 @@ public class Reservation
             name = "reservationId"
     )
     private Long reservationId;
+
+
     private double ticket_type;
+
     @ManyToOne
     private User userId;
     @ManyToOne
@@ -39,7 +42,10 @@ public class Reservation
 
 
 
-    public Reservation(double ticket_type, User userId, Screening screeningId, Seat seatId) {
+    public Reservation(double ticket_type,
+                       User userId,
+                       Screening screeningId,
+                       Seat seatId) {
         this.ticket_type = ticket_type;
         this.userId = userId;
         this.screeningId = screeningId;

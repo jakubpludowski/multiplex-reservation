@@ -24,12 +24,13 @@ public class ReservationManager
         this.reservationRepo = reservationRepo;
     }
 
-
+    public Reservation save(Reservation x){
+        return reservationRepo.save(x);
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDataBase()
     {
-
 
 
     }

@@ -23,21 +23,62 @@ public class User
             name = "userId"
     )
     private Long userId;
+
+    @Column(
+            name = "first_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String name;
+
+    @Column(
+            name = "last_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String surname;
+
+    @Column(
+            name = "email",
+            columnDefinition = "TEXT"
+    )
     private String email;
+
+
     private double amount_to_pay;
     private int amount_of_res;
-    @OneToMany
+
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "student"
+    )
     private Set<Reservation> reservations;
 
 
+    public void addReservation(Reservation x)
+    {
+        if(!this.reservations.contains(x))
+        {
+            this.reservations.add(x);
+            x.setUserId(this);
+        }
+    }
+
+    public void removeReservation(Reservation x)
+    {
+        if(this.reservations.contains(x))
+        {
+            this.reservations.remove(x);
+            x.setUserId(null);
+        }
+    }
 
 
 
 
-
-    public User(String name, String surname, String email) {
+    public User(String name,
+                String surname,
+                String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;

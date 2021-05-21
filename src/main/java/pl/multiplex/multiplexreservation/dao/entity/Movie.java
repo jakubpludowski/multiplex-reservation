@@ -32,15 +32,29 @@ public class Movie
 
 
 
+    public void addScreening(Screening x)
+    {
+        if(!this.screenings.contains(x))
+        {
+            this.screenings.add(x);
+            x.setMovieId(this);
+        }
+    }
+
+    public void removeScreening(Screening x)
+    {
+        if(this.screenings.contains(x))
+        {
+            this.screenings.remove(x);
+            x.setMovieId(null);
+        }
+    }
 
 
 
-
-
-
-
-
-    public Movie(String title, double duration, Set<Screening> screenings) {
+    public Movie(String title,
+                 double duration,
+                 Set<Screening> screenings) {
         this.title = title;
         this.duration = duration;
         this.screenings = screenings;

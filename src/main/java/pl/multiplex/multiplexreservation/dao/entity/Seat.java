@@ -31,11 +31,30 @@ public class Seat
 
 
 
+    public void addReservation(Reservation x)
+    {
+        if(!this.reservations.contains(x))
+        {
+            this.reservations.add(x);
+            x.setSeatId(this);
+        }
+    }
+
+    public void removeReservation(Reservation x)
+    {
+        if(this.reservations.contains(x))
+        {
+            this.reservations.remove(x);
+            x.setSeatId(null);
+        }
+    }
 
 
 
-
-    public Seat(int nr_row, int nr_seat, CinemaRoom cinemaRoomId, Set<Reservation> reservations) {
+    public Seat(int nr_row,
+                int nr_seat,
+                CinemaRoom cinemaRoomId,
+                Set<Reservation> reservations) {
         this.nr_row = nr_row;
         this.nr_seat = nr_seat;
         this.cinemaRoomId = cinemaRoomId;

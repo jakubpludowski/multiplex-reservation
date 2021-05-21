@@ -1,7 +1,12 @@
 package pl.multiplex.multiplexreservation.dao.entity;
 
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,33 +29,58 @@ public class Screening
             name = "screeningid"
     )
     private Long screeningId;
-    private Date date;
-    private int number_of_room;
+    private LocalDate date;
+    private LocalTime time;
     @ManyToOne
     private Movie movieId;
     @OneToMany
     private Set<Reservation> reservations;
     @ManyToOne
-    private CinemaRoom Id;
+    private CinemaRoom CinemaRoomId;
 
 
 
 
+    public void addReservation(Reservation x)
+    {
+        if(!this.reservations.contains(x))
+        {
+            this.reservations.add(x);
+            x.setScreeningId(this);
+        }
+    }
+
+    public void removeReservation(Reservation x)
+    {
+        if(this.reservations.contains(x))
+        {
+            this.reservations.remove(x);
+            x.setScreeningId(null);
+        }
+    }
 
 
-
-
-
-
-    public Screening(Date date, int number_of_room, Movie movieId, Set<Reservation> reservations, CinemaRoom id) {
+    public Screening(LocalDate date,
+                     LocalTime time,
+                     Movie movieId,
+                     Set<Reservation> reservations,
+                     CinemaRoom cinemaRoomId) {
         this.date = date;
-        this.number_of_room = number_of_room;
+        this.time = time;
         this.movieId = movieId;
         this.reservations = reservations;
-        Id = id;
+        CinemaRoomId = cinemaRoomId;
     }
 
     public Screening() {
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public Long getScreeningId() {
@@ -61,20 +91,12 @@ public class Screening
         this.screeningId = screeningId;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public int getNumber_of_room() {
-        return number_of_room;
-    }
-
-    public void setNumber_of_room(int number_of_room) {
-        this.number_of_room = number_of_room;
     }
 
     public Movie getMovieId() {
@@ -93,12 +115,12 @@ public class Screening
         this.reservations = reservations;
     }
 
-    public CinemaRoom getId() {
-        return Id;
+    public CinemaRoom getCinemaRoomId() {
+        return CinemaRoomId;
     }
 
-    public void setId(CinemaRoom id) {
-        Id = id;
+    public void setCinemaRoomId(CinemaRoom id) {
+        CinemaRoomId = id;
     }
 
     @Override
@@ -106,9 +128,8 @@ public class Screening
         return "Screening{" +
                 "screeningId=" + screeningId +
                 ", date=" + date +
-                ", number_of_room=" + number_of_room +
                 ", movieId=" + movieId +
-                ", Id=" + Id +
+                ", Id=" + CinemaRoomId +
                 '}';
     }
 }
