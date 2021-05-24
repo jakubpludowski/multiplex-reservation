@@ -37,9 +37,9 @@ public class MultiplexReservationApplication {
             Set<User> users= new HashSet<User>();
             Set<Seat> seats= new HashSet<Seat>();
 
-            movies = generateMovies(1);
-            cinemaRooms = generateCinemaRooms(1,2,3,seatRepo);
-            screenings = generateScreenings(2,cinemaRooms,movies);
+            movies = generateMovies(3);
+            cinemaRooms = generateCinemaRooms(2,2,3,seatRepo);
+            screenings = generateScreenings(3,cinemaRooms,movies);
 
             movieRepo.saveAll(movies);
             cinemaRoomRepo.saveAll(cinemaRooms);
@@ -90,7 +90,7 @@ public class MultiplexReservationApplication {
     return cinemaRooms;
     }
 
-    public Set<Screening> generateScreenings(int nrOfDays, Set<CinemaRoom> cinemaRooms, Set<Movie> movies ){
+    public Set<Screening> generateScreenings(int nrOfDays, Set<CinemaRoom> cinemaRooms, Set<Movie> movies){
         Set<Screening> screenings = new HashSet<Screening>();
         Set<Reservation> reservations = new HashSet<Reservation>();           //to add
         int nrOfMoviesPerDay = movies.size();
@@ -118,12 +118,13 @@ public class MultiplexReservationApplication {
                 int hourIter = 0;
                 while (movieIter.hasNext()) {
                     Movie movie = movieIter.next();
-                    screenings.add(new Screening(days[j], hours[hourIter], movie, reservations, room));
-
+                    Screening screening = new Screening(days[j], hours[hourIter], movie, reservations, room);
+                    screenings.add(screening);
                     hourIter++;
                 }
             }
         }
+
 
 
         return screenings;
