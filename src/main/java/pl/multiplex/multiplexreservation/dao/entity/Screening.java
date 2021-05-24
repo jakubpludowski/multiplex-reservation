@@ -29,8 +29,8 @@ public class Screening
             name = "screeningid"
     )
     private Long screeningId;
-    private LocalDate date;
-    private LocalTime time;
+    private int date;
+    private int time;
     @ManyToOne
     private Movie movieId;
     @OneToMany
@@ -60,8 +60,8 @@ public class Screening
     }
 
 
-    public Screening(LocalDate date,
-                     LocalTime time,
+    public Screening(int date,
+                     int time,
                      Movie movieId,
                      Set<Reservation> reservations,
                      CinemaRoom cinemaRoomId) {
@@ -75,11 +75,9 @@ public class Screening
     public Screening() {
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
+    public int getTime() { return time; }
 
-    public void setTime(LocalTime time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -91,11 +89,11 @@ public class Screening
         this.screeningId = screeningId;
     }
 
-    public LocalDate getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(int date) {
         this.date = date;
     }
 

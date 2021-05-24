@@ -25,9 +25,6 @@ public class CinemaRoom
             name = "cinemaRoomid"
     )
     private Long cinemaRoomId;
-    private int nr_of_room;
-    private int max_row;
-    private int max_col;
     @OneToMany
     private Set<Screening> screenings;
     @OneToMany
@@ -74,14 +71,9 @@ public class CinemaRoom
 
 
 
-    public CinemaRoom(int nr_of_room,
-                      int max_row,
-                      int max_col,
+    public CinemaRoom(
                       Set<Screening> screenings,
                       Set<Seat> seats) {
-        this.nr_of_room = nr_of_room;
-        this.max_row = max_row;
-        this.max_col = max_col;
         this.screenings = screenings;
         this.seats = seats;
     }
@@ -97,29 +89,6 @@ public class CinemaRoom
         this.cinemaRoomId = cinemaRoomId;
     }
 
-    public int getNr_of_room() {
-        return nr_of_room;
-    }
-
-    public void setNr_of_room(int nr_of_room) {
-        this.nr_of_room = nr_of_room;
-    }
-
-    public int getMax_row() {
-        return max_row;
-    }
-
-    public void setMax_row(int max_row) {
-        this.max_row = max_row;
-    }
-
-    public int getMax_col() {
-        return max_col;
-    }
-
-    public void setMax_col(int max_col) {
-        this.max_col = max_col;
-    }
 
     public Set<Screening> getScreenings() {
         return screenings;
@@ -141,9 +110,6 @@ public class CinemaRoom
     public String toString() {
         return "CinemaRoom{" +
                 "cinemaRoomId=" + cinemaRoomId +
-                ", nr_of_room=" + nr_of_room +
-                ", max_row=" + max_row +
-                ", max_col=" + max_col +
                 '}';
     }
 }
