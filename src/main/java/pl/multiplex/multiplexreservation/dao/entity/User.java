@@ -48,10 +48,7 @@ public class User
     private double amount_to_pay;
     private int amount_of_res;
 
-    @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            mappedBy = "student"
-    )
+    @OneToMany
     private Set<Reservation> reservations;
 
 
