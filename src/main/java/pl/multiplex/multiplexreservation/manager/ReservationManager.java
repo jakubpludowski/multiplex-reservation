@@ -20,7 +20,7 @@ public class ReservationManager
     private SeatRepo seatRepo;
     private UserRepo userRepo;
 
-
+    @Autowired
     public ReservationManager(ReservationRepo reservationRepo, ScreeningRepo screeningRepo, MovieRepo movieRepo, SeatRepo seatRepo, UserRepo userRepo) {
         this.reservationRepo = reservationRepo;
         this.screeningRepo = screeningRepo;
@@ -29,7 +29,7 @@ public class ReservationManager
         this.userRepo = userRepo;
     }
 
-    @Autowired
+
 
 
     public Iterable<Screening> showAll() {return screeningRepo.findAll();}
