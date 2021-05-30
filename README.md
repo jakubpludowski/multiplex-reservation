@@ -82,7 +82,6 @@ Zarezerwowane miejsca są rezerwowane bez nalicznaia opłaty dla użytkownika "A
 
 
 ## Odnośnie wymagań
-Mam świadomość, że nie spełniłem wszystkich wymagań i założeń tego projektu. Niestety nie zdążyłem też zrobić demo, które by ten projekt ładnei prezentowało.  
-Proszę jednak wziąć pod uwagę, że nigdy wcześniej nie pisałem nic we frameworku Spring i nie mam doświadczenia w tego typu aplikacjach, a w 2 tygodnie udało mi się napisać 
-taki projekt.
+Mam świadomość, że nie spełniłem wszystkich wymagań i założeń tego projektu. Niestety nie zdążyłem też zrobić demo, które by ten projekt ładnie prezentowało.  
+Zważywszy na bieżącą liczbę zobowiązań oraz na fakt, że pisanie we frameworku Spring było dla mnie nowością, przesyłam Państwu taką wersję pracy, którą udało mi się zrealizować w zaledwie 2 tygodnie. Było to dla mnie kształcące doświadczenie, dzięki któremu poszerzyłem swoją wiedzę w zakresie projektowania aplikacji webowych. 
 Wszystkie pliki projektu są w osobnej gałęzi *newbranch*.
