@@ -38,7 +38,7 @@ public class MultiplexReservationApplication {
             Set<Seat> seats= new HashSet<Seat>();
 
             movies = generateMovies(3);
-            cinemaRooms = generateCinemaRooms(2,2,3,seatRepo);
+            cinemaRooms = generateCinemaRooms(3,2,3,seatRepo);
             screenings = generateScreenings(3,cinemaRooms,movies);
             User admin = new User("Admin","Admin","Admin");
             reservations = generateReservations(admin,screenings,0.3,reservationRepo,userRepo);
