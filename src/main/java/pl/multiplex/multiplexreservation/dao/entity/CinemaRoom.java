@@ -3,6 +3,7 @@ package pl.multiplex.multiplexreservation.dao.entity;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -57,6 +58,18 @@ public class CinemaRoom
             this.seats.add(x);
             x.setCinemaRoomId(this);
         }
+    }
+
+    public Seat getSeat(Long id)
+    {
+        Iterator seatIter = seats.iterator();
+        while(seatIter.hasNext()){
+            Seat seat =(Seat) seatIter.next();
+            if(seat.getSeatId() == id){
+                return seat;
+            }
+        }
+        return null;
     }
 
     public void removeSeat(Seat x)

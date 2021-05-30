@@ -40,10 +40,15 @@ public class MultiplexReservationApplication {
             movies = generateMovies(3);
             cinemaRooms = generateCinemaRooms(2,2,3,seatRepo);
             screenings = generateScreenings(3,cinemaRooms,movies);
+            User admin = new User("Admin","Admin","Admin");
+            reservations = generateReservations(admin,screenings,0.3,reservationRepo,userRepo);
+
+
 
             movieRepo.saveAll(movies);
             cinemaRoomRepo.saveAll(cinemaRooms);
             screeningRepo.saveAll(screenings);
+            reservationRepo.saveAll(reservations);
 
 
         };
@@ -85,7 +90,12 @@ public class MultiplexReservationApplication {
             Set<Seat> seats = null;
             seats = generateSeats(nrOfRows, nrOfColumns);
             seatRepo.saveAll(seats);
-            cinemaRooms.add(new CinemaRoom(screenings,seats));
+            CinemaRoom room = new CinemaRoom(screenings,seats);
+            cinemaRooms.add(room);
+            Iterator<Seat> seatIter = seats.iterator();
+            while(seatIter.hasNext()){
+                seatIter.next().setCinemaRoomId(room);
+            }
         }
     return cinemaRooms;
     }
@@ -128,6 +138,30 @@ public class MultiplexReservationApplication {
 
 
         return screenings;
+    }
+    public Set<Reservation> generateReservations(User user,Set<Screening> screenings,double probabilty, ReservationRepo reservationRepo,UserRepo userRepo){
+        Set<Reservation> reservations= new HashSet<Reservation>();
+        userRepo.save(user);
+        double ticketType = 0;
+        probabilty = (int)(probabilty*100);
+        int low= 1;
+        int high = 100;
+        Iterator<Screening> screeningIter = screenings.iterator();
+        while(screeningIter.hasNext()){
+            Screening screening = screeningIter.next();
+            Set<Seat> seats = screening.getCinemaRoomId().getSeats();
+            Iterator<Seat> seatIter = seats.iterator();
+            while(seatIter.hasNext()){
+                Seat seat = seatIter.next();
+                Random random = new Random();
+                int result = random.nextInt(high-low)+low;
+                if(result<probabilty){
+                    Reservation newReservation = new Reservation(ticketType,user,screening,seat);
+                    reservations.add(newReservation);
+                }
+            }
+        }
+        return reservations;
     }
 
 }

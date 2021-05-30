@@ -25,4 +25,9 @@ public interface ScreeningRepo extends PagingAndSortingRepository<Screening, Lon
             value = "SELECT * FROM SCREENING WHERE DATE = :date AND TIME >= :timeMin AND TIME <= :timeMax",
             nativeQuery = true)
     List<Screening> findScreeningByMinMaxTimeAndDate(int date, int timeMin, int timeMax);
+
+    @Query(
+            value = "SELECT * FROM SCREENING WHERE SCREENINGID  = :Id ",
+            nativeQuery = true)
+    Screening findScreeningById(Long Id);
 }
