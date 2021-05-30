@@ -34,14 +34,6 @@ public class Reservation
     @ManyToOne
     private Seat seatId;
 
-
-
-
-
-
-
-
-
     public Reservation(double ticket_type,
                        User userId,
                        Screening screeningId,

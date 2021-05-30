@@ -51,20 +51,15 @@ public class User
     @OneToMany
     private Set<Reservation> reservations;
 
-
-    public void addReservation(Reservation x)
-    {
-        if(!this.reservations.contains(x))
-        {
+    public void addReservation(Reservation x) {
+        if(!this.reservations.contains(x)) {
             this.reservations.add(x);
             x.setUserId(this);
         }
     }
 
-    public void removeReservation(Reservation x)
-    {
-        if(this.reservations.contains(x))
-        {
+    public void removeReservation(Reservation x) {
+        if(this.reservations.contains(x)) {
             this.reservations.remove(x);
             x.setUserId(null);
         }

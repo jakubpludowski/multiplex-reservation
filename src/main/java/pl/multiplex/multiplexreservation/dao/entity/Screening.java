@@ -30,7 +30,7 @@ public class Screening
     )
     private Long screeningId;
     private int date;
-    private int time;
+    private double time;
     @ManyToOne
     private Movie movieId;
     @OneToMany
@@ -38,30 +38,22 @@ public class Screening
     @ManyToOne
     private CinemaRoom CinemaRoomId;
 
-
-
-
-    public void addReservation(Reservation x)
-    {
-        if(!this.reservations.contains(x))
-        {
+    public void addReservation(Reservation x) {
+        if(!this.reservations.contains(x)) {
             this.reservations.add(x);
             x.setScreeningId(this);
         }
     }
 
-    public void removeReservation(Reservation x)
-    {
-        if(this.reservations.contains(x))
-        {
+    public void removeReservation(Reservation x) {
+        if(this.reservations.contains(x)) {
             this.reservations.remove(x);
             x.setScreeningId(null);
         }
     }
 
-
     public Screening(int date,
-                     int time,
+                     double time,
                      Movie movieId,
                      Set<Reservation> reservations,
                      CinemaRoom cinemaRoomId) {
@@ -75,9 +67,9 @@ public class Screening
     public Screening() {
     }
 
-    public int getTime() { return time; }
+    public double getTime() { return time; }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.time = time;
     }
 

@@ -57,4 +57,13 @@ public class ReservationApi
         reservations.postUser(name,surname,email);
     }
 
+    @GetMapping("/total")
+    public String getAmountToPay(@RequestParam Long userId) {
+        double money = reservations.getAmountToPay(userId);
+        String time = reservations.getExpirationTime(userId);
+        return "Należy zapłacić " + money + " zł. Opłatę nalezy uiścić przed " + time;
+    }
+
+
+
 }

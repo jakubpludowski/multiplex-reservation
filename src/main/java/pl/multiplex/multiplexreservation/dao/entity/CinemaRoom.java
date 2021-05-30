@@ -33,26 +33,21 @@ public class CinemaRoom
 
 
 
-    public void addScreening(Screening x)
-    {
-        if(!this.screenings.contains(x))
-        {
+    public void addScreening(Screening x) {
+        if(!this.screenings.contains(x)) {
             this.screenings.add(x);
             x.setCinemaRoomId(this);
         }
     }
 
-    public void removeScreening(Screening x)
-    {
-        if(this.screenings.contains(x))
-        {
+    public void removeScreening(Screening x) {
+        if(this.screenings.contains(x)) {
             this.screenings.remove(x);
             x.setCinemaRoomId(null);
         }
     }
 
-    public void addSeat(Seat x)
-    {
+    public void addSeat(Seat x) {
         if(!this.seats.contains(x))
         {
             this.seats.add(x);
@@ -60,8 +55,7 @@ public class CinemaRoom
         }
     }
 
-    public Seat getSeat(Long id)
-    {
+    public Seat getSeat(Long id) {
         Iterator seatIter = seats.iterator();
         while(seatIter.hasNext()){
             Seat seat =(Seat) seatIter.next();
@@ -72,10 +66,8 @@ public class CinemaRoom
         return null;
     }
 
-    public void removeSeat(Seat x)
-    {
-        if(this.seats.contains(x))
-        {
+    public void removeSeat(Seat x) {
+        if(this.seats.contains(x)) {
             this.seats.remove(x);
             x.setCinemaRoomId(null);
         }

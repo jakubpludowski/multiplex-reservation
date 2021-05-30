@@ -19,4 +19,9 @@ public interface ReservationRepo extends PagingAndSortingRepository<Reservation,
             value = "SELECT * FROM RESERVATION WHERE  SCREENING_ID_SCREENINGID  = :Id ",
             nativeQuery = true)
     List<Reservation> getReservedSeats(Long Id);
+
+    @Query(
+            value = "SELECT * FROM RESERVATION WHERE  USER_ID_USER_ID   = :Id ",
+            nativeQuery = true)
+    List<Reservation> getUser(Long Id);
 }

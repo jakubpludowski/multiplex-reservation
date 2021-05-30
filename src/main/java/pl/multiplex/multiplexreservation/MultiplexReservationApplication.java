@@ -43,14 +43,10 @@ public class MultiplexReservationApplication {
             User admin = new User("Admin","Admin","Admin");
             reservations = generateReservations(admin,screenings,0.3,reservationRepo,userRepo);
 
-
-
             movieRepo.saveAll(movies);
             cinemaRoomRepo.saveAll(cinemaRooms);
             screeningRepo.saveAll(screenings);
             reservationRepo.saveAll(reservations);
-
-
         };
     }
 
@@ -59,11 +55,10 @@ public class MultiplexReservationApplication {
         Set<Screening> screenings = new HashSet<Screening>();           //to add
         String[] movies_names = new String[3];
         double[] durations = new double[3];
-        for(int i =0;i<nrOfMovies;i++)
-        {
+        for(int i =0;i<nrOfMovies;i++) {
             movies_names[i] = "Movie nr " +(i+1);
-            if(i%2 ==0)
-            { durations[i] = 2 + ((double)i/10); } else {
+            if(i%2 ==0) {
+                durations[i] = 2 + ((double)i/10); } else {
                 durations[i] = 2 - ((double)i/10);
             }
             movies.add(new Movie(movies_names[i],durations[i],screenings));
@@ -85,8 +80,7 @@ public class MultiplexReservationApplication {
     public Set<CinemaRoom> generateCinemaRooms(int nrOfRooms,int nrOfRows,int nrOfColumns,SeatRepo seatRepo){
         Set<Screening> screenings = new HashSet<Screening>();           //to add
         Set<CinemaRoom> cinemaRooms = new HashSet<CinemaRoom>();
-        for(int i =0;i<nrOfRooms;i++)
-        {
+        for(int i =0;i<nrOfRooms;i++) {
             Set<Seat> seats = null;
             seats = generateSeats(nrOfRows, nrOfColumns);
             seatRepo.saveAll(seats);
@@ -109,17 +103,12 @@ public class MultiplexReservationApplication {
         LocalTime time = LocalTime.of(12,0);
         int[] days =new int[nrOfDays];
         int[] hours =new int[nrOfMoviesPerDay];
-        for(int i=0;i<nrOfDays; i++)
-        {
+        for(int i=0;i<nrOfDays; i++) {
             days[i] = date.plusDays(i+1).getDayOfMonth();
         }
-        for(int i=0;i<nrOfMoviesPerDay; i++)
-        {
+        for(int i=0;i<nrOfMoviesPerDay; i++) {
             hours[i] = time.plusHours((3*i)).getHour();
         }
-
-
-
         Iterator<CinemaRoom> roomIter = cinemaRooms.iterator();
         while(roomIter.hasNext()) {
             CinemaRoom room = roomIter.next();
@@ -134,9 +123,6 @@ public class MultiplexReservationApplication {
                 }
             }
         }
-
-
-
         return screenings;
     }
     public Set<Reservation> generateReservations(User user,Set<Screening> screenings,double probabilty, ReservationRepo reservationRepo,UserRepo userRepo){

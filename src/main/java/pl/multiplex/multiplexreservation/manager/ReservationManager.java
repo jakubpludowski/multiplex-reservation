@@ -93,22 +93,23 @@ public class ReservationManager
         Seat seat = scr.getCinemaRoomId().getSeat(seatId);
         double price = 0;
         boolean correct = false;
-        if(ticketType == "adult"){
+        if(ticketType.equals("adult")){
             price = 25;
             correct = true;
         }
-        else if(ticketType == "student"){
+        else if(ticketType.equals("student")){
             price = 18;
             correct = true;
         }
-        else if(ticketType == "child"){
+        else if(ticketType.equals("child")){
             price = 12.5;
             correct = true;
         }
         else {System.out.println("Podaj wlasciwy typ biletu");}
 
         if(correct){
-            if(!scr.getCinemaRoomId().getSeats().contains(seat)){
+            List <Seat> freeSeats = getSeatsByScreeningId(screeningId);
+            if(freeSeats.contains(seat)){
                 Reservation newReservation = new Reservation(price, user, scr, seat);
                 reservationRepo.save(newReservation);
                 System.out.println("Dodano nową rezerwację");
@@ -120,5 +121,43 @@ public class ReservationManager
     }
     public void postUser(String name, String surname, String email){
         userRepo.save(new User(name, surname,email));
+    }
+
+    public String getExpirationTime(Long userId) {
+        String time = null;
+        int date = 0;
+        double hour = 0;
+        List<Reservation> res = reservationRepo.getUser(userId);
+        Iterator resIter =  res.iterator();
+        while(resIter.hasNext()){
+            if(date == 0){
+                Reservation thisRes =(Reservation) resIter.next();
+                date =  thisRes.getScreeningId().getDate();
+                hour = thisRes.getScreeningId().getTime();
+            }
+            else {
+                Reservation thisRes =(Reservation) resIter.next();
+                if(date>= thisRes.getScreeningId().getDate()){
+                    date = thisRes.getScreeningId().getDate();
+                    if(hour >=thisRes.getScreeningId().getTime() ){
+                        hour = thisRes.getScreeningId().getTime();
+                    }
+                }
+            }
+        }
+        hour = hour - 1 + 0.45;
+        time = "Dzień: " + date +". Godzina: "+hour+".";
+        return time;
+    }
+
+    public double getAmountToPay(Long userId){
+        double money = 0;
+        List<Reservation> res = reservationRepo.getUser(userId);
+        Iterator resIter =  res.iterator();
+        while(resIter.hasNext()){
+            Reservation thisRes =(Reservation) resIter.next();
+            money += thisRes.getTicket_type();
+        }
+        return money;
     }
 }
